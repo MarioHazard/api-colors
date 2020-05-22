@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-sequence')(mongoose);
 
 // create object and attributes
 var ColorSchema = mongoose.Schema({
-    id: { type: Number, unique: true },
+    
+    _id : Number,
     name: String,
     year: Number,
     color: String,
     pantone_value: String
 });
-// export to use from other files
+ColorSchema.plugin(autoIncrement, {inc_field: '_id'});
 module.exports = mongoose.model('Color', ColorSchema);

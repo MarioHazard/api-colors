@@ -7,7 +7,7 @@ exports.findAll = (req, res) => {
 Color.find().limit( parseInt(limit) )
   .then(colors => {
       let result = colors.map(function(item){
-        return {id : item["id"],name : item["name"], color : item["color"]}
+        return {id : item["_id"],name : item["name"], color : item["color"]}
       });
       let obj = { 
         '?xml version=\"1.0\" encoding=\"UTF-8\"?' : null,
@@ -39,7 +39,6 @@ if(!req.body) {
 }
 // Create a new Color
 const color = new Color({
-  id: req.body.id,
   name: req.body.name,
   year: req.body.year,
   color: req.body.color,
