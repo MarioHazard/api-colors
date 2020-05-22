@@ -2,26 +2,33 @@ const Color = require('../models/color.model.js');
 const o2x = require('object-to-xml');
 // Retrieve and return all colors from the database.
 exports.findAll = (req, res) => {
+  //to test frontend
+  res.setHeader('Access-Control-Allow-Origin', '*');
   //receive query values and assing defaults
   var page = req.query.page ? parseInt(req.query.page) : 1;
   var per_page = req.query.per_page ? parseInt(req.query.per_page) : 6;
   var total = 0;
   var total_pages=0;
+  //get total number of colors and set total pages
   Color.countDocuments({}, function(error, n_docs) {
     total=n_docs;
     total_pages=(total%per_page==0)? total/per_page : parseInt(total/per_page)+1;
   });
   
+  //find pagination range of colors in db
   Color.find().limit(per_page).skip(per_page*(page-1))
     .then(colors => {
+        //return only specific attributes
         let result = colors.map(function(item){
           return {id : item["_id"],name : item["name"], color : item["color"]}
         });
+        //create xml object
         let obj = { '?xml version=\"1.0\" encoding=\"UTF-8\"?' : null,
                     colors : {
                       '#' : { color : result }
                     }
         };
+      //response depends on the type, default is json
       if(req.query.type=='xml'){
           res.set('Content-Type', 'text/xml').send(o2x(obj));
       }else{
@@ -63,7 +70,7 @@ exports.create = (req, res) => {
 
 // Find a single Color with a id
 exports.findOne = (req, res) => {
-  Color.findOne({'id':req.params.id}).then(color => {
+  Color.findById(req.params.id).then(color => {
     if(!color) {
       return res.status(404).send({
         message: "Color not found with id " + req.params.id
@@ -107,7 +114,7 @@ exports.update = (req, res) => {
     });
   }
   // Find color and update it with the request body
-  Color.findAndUpdate({'id':req.params.id}, {
+  Color.findByIdAndUpdate(req.params.id, {
     id: req.body.id,
     name: req.body.name,
     year: req.body.year,
@@ -135,7 +142,7 @@ exports.update = (req, res) => {
 
 // Delete a Color with the specified id in the request
 exports.delete = (req, res) => {
-Color.findAndRemove({'id':req.params.id})
+Color.findByIdAndRemove(req.params.id)
 .then(color => {
 if(!color) {
   return res.status(404).send({
