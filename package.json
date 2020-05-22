@@ -1,5 +1,6 @@
 {
  "name": "colors-api-rest",
+ "author": "mariohazard",
  "version": "1.0.0",
  "dependencies": {
   "body-parser": "^1.19.0",
@@ -8,5 +9,8 @@
   "https": "^1.0.0",
   "mongoose": "^5.7.11",
   "object-to-xml": "^2.0.0"
- }
+ },
+ "engines": {
+    "node": "10.20.1"
+  }
 }
