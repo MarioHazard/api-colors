@@ -115,7 +115,6 @@ exports.update = (req, res) => {
   }
   // Find color and update it with the request body
   Color.findByIdAndUpdate(req.params.id, {
-    id: req.body.id,
     name: req.body.name,
     year: req.body.year,
     color: req.body.color,
