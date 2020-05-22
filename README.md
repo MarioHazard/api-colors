@@ -1,6 +1,6 @@
 # API colors
 
-API REST desarrollada en Node.js v10.20.1 con express v4.17.1. Se utiliza una base de datos mongoDB alojada en [mongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+API REST desarrollada en Node.js v10.20.1 con express v4.17.1. Se utiliza una base de datos mongoDB alojada en [mongoDB Atlas](https://www.mongodb.com/cloud/atlas). Permite obtener una lista de colores con algunas de sus propiedades, además de un detalle de cada color.
 
 ## Recursos
 
