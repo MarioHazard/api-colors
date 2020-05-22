@@ -3,7 +3,8 @@ const o2x = require('object-to-xml');
 // Retrieve and return all colors from the database.
 exports.findAll = (req, res) => {
     let type = req.query.type;
-Color.find()
+    let limit = req.query.limit;
+Color.find().limit( parseInt(limit) )
   .then(colors => {
       let result = colors.map(function(item){
         return {id : item["id"],name : item["name"], color : item["color"]}
