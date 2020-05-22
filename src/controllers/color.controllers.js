@@ -114,12 +114,7 @@ exports.update = (req, res) => {
     });
   }
   // Find color and update it with the request body
-  Color.findByIdAndUpdate(req.params.id, {
-    name: req.body.name,
-    year: req.body.year,
-    color: req.body.color,
-    pantone_value: req.body.pantone_value
-  }, {new: true}).then(color => {
+  Color.findByIdAndUpdate(req.params.id, req.body, {new: true}).then(color => {
     if(!color) {
       return res.status(404).send({
       message: "color not found with id " + req.params.id
