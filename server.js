@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 
 //ports to https and http
 const httpsPort = 80;
-const port = 4008;
+const port = 5000;
 
 //certs to https
 var privateKey  = fs.readFileSync('certs/server.key', 'utf8');
